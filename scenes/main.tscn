@@ -1,7 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://c3r4fckoal072"]
+[gd_scene load_steps=30 format=3 uid="uid://c3r4fckoal072"]
 
 [ext_resource type="Script" uid="uid://cnqllqnb0nmxv" path="res://scenes/ranks.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://byi1ok57ag0lu" path="res://scenes/game.gd" id="1_y6deb"]
 [ext_resource type="Texture2D" uid="uid://bnsdr3jvaosw3" path="res://ranks/korpraali.svg" id="2_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://iwbk01n23b1i" path="res://images/camo.jpg" id="2_og1vs"]
 [ext_resource type="Texture2D" uid="uid://bmbb1w7nw6wua" path="res://ranks/sotamies.svg" id="3_jscy8"]
 [ext_resource type="Texture2D" uid="uid://1hx30r5fpjfe" path="res://ranks/aliupseerioppilas.svg" id="4_pm3ni"]
 [ext_resource type="Texture2D" uid="uid://byv32v8nusc4f" path="res://ranks/alikersantti.svg" id="5_y6deb"]
@@ -23,8 +25,17 @@
 [ext_resource type="Texture2D" uid="uid://dwvj7478tmfgk" path="res://ranks/ylikersantti.svg" id="21_5he1u"]
 [ext_resource type="Texture2D" uid="uid://drgdqb8r8p123" path="res://ranks/yliluutnantti.svg" id="22_5poiv"]
 [ext_resource type="Texture2D" uid="uid://semu0n26skv7" path="res://ranks/ylivääpeli.svg" id="23_pm3ni"]
+[ext_resource type="AudioStream" uid="uid://dhecauxxr5031" path="res://sounds/correct.wav" id="26_vxglm"]
+[ext_resource type="AudioStream" uid="uid://xvalu3rmo3rv" path="res://sounds/incorrect.wav" id="27_2f3dj"]
 
-[node name="Control" type="Control"]
+[sub_resource type="Theme" id="Theme_og1vs"]
+GridContainer/constants/h_separation = 50
+GridContainer/constants/v_separation = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_og1vs"]
+font_size = 36
+
+[node name="Game" type="Control" node_paths=PackedStringArray("rank_manager", "option_buttons", "next_round_timer", "correct_sfx", "incorrect_sfx", "rank_label", "score_label", "high_score_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,9 +43,102 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+theme = SubResource("Theme_og1vs")
+script = ExtResource("1_y6deb")
+rank_manager = NodePath("RankManager")
+option_buttons = [NodePath("GridContainer/OptionButton1"), NodePath("GridContainer/OptionButton2"), NodePath("GridContainer/OptionButton3"), NodePath("GridContainer/OptionButton4")]
+next_round_timer = NodePath("NextRoundTimer")
+correct_sfx = NodePath("SFX/CorrectSFX")
+incorrect_sfx = NodePath("SFX/IncorrectSFX")
+rank_label = NodePath("RankLabel")
+score_label = NodePath("StatContainer/ScoreLabel")
+high_score_label = NodePath("StatContainer/HighScoreLabel")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_og1vs")
+expand_mode = 1
+stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Ranks" type="Node" parent="."]
+[node name="RankLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 64.0
+offset_right = 180.0
+offset_bottom = 114.0
+grow_horizontal = 2
+text = "ARVOMERKKI"
+label_settings = SubResource("LabelSettings_og1vs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -166.0
+offset_right = 200.0
+offset_bottom = 564.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.555, 0.555)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 2
+
+[node name="OptionButton1" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_y6deb")
+
+[node name="OptionButton2" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_y6deb")
+
+[node name="OptionButton3" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_y6deb")
+
+[node name="OptionButton4" type="TextureButton" parent="GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_y6deb")
+
+[node name="StatContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -44.0
+offset_right = -16.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="StatContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Pisteet: 0"
+
+[node name="HighScoreLabel" type="Label" parent="StatContainer"]
+layout_mode = 2
+text = "Ennätys: 0"
+
+[node name="RankManager" type="Node" parent="."]
 script = ExtResource("1_o5qli")
 ranks = Dictionary[String, CompressedTexture2D]({
 "Alikersantti": ExtResource("5_y6deb"),
@@ -60,3 +164,16 @@ ranks = Dictionary[String, CompressedTexture2D]({
 "Yliluutnantti": ExtResource("22_5poiv"),
 "Ylivääpeli": ExtResource("23_pm3ni")
 })
+
+[node name="NextRoundTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="CorrectSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("26_vxglm")
+
+[node name="IncorrectSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("27_2f3dj")
+
+[connection signal="timeout" from="NextRoundTimer" to="." method="_on_next_round_timer_timeout"]

@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="ArvomerkkiPeli"
+run/main_scene="uid://c3r4fckoal072"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=720
-window/size/viewport_height=1280
+window/size/viewport_width=360
+window/size/viewport_height=620
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
