@@ -46,8 +46,18 @@ func setup_buttons():
 	var i := 0
 	for btn in option_buttons:
 		btn.pressed.connect(on_answer.bind(i))
+		btn.mouse_entered.connect(_on_button_mouse_entered.bind(btn))
+		btn.mouse_exited.connect(_on_button_mouse_exited.bind(btn))
 		i += 1
 
+
+func _on_button_mouse_entered(btn: TextureButton) -> void:
+	btn.modulate = Color.from_rgba8(225, 225, 225)
+	
+	
+func _on_button_mouse_exited(btn: TextureButton) -> void:
+	btn.modulate = Color.WHITE
+	
 
 func on_answer(answer_index: int):
 	if not can_answer: return

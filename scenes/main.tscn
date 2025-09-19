@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://cnqllqnb0nmxv" path="res://scenes/ranks.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://byi1ok57ag0lu" path="res://scenes/game.gd" id="1_y6deb"]
 [ext_resource type="Texture2D" uid="uid://bnsdr3jvaosw3" path="res://ranks/korpraali.svg" id="2_0wfyh"]
-[ext_resource type="Texture2D" uid="uid://iwbk01n23b1i" path="res://images/camo.jpg" id="2_og1vs"]
 [ext_resource type="FontFile" uid="uid://m6yl1wyl0w7u" path="res://fonts/Roboto-Black.ttf" id="3_2f3dj"]
 [ext_resource type="Texture2D" uid="uid://bmbb1w7nw6wua" path="res://ranks/sotamies.svg" id="3_jscy8"]
+[ext_resource type="Texture2D" uid="uid://boaf6y5d0b37y" path="res://images/camo.svg" id="3_yq6so"]
 [ext_resource type="Texture2D" uid="uid://1hx30r5fpjfe" path="res://ranks/aliupseerioppilas.svg" id="4_pm3ni"]
 [ext_resource type="Texture2D" uid="uid://byv32v8nusc4f" path="res://ranks/alikersantti.svg" id="5_y6deb"]
 [ext_resource type="Texture2D" uid="uid://br706owp718wc" path="res://ranks/eversti.svg" id="6_og1vs"]
@@ -32,7 +32,7 @@
 [sub_resource type="Theme" id="Theme_og1vs"]
 GridContainer/constants/h_separation = 50
 GridContainer/constants/v_separation = 50
-Label/fonts/font = null
+Label/fonts/font = ExtResource("3_2f3dj")
 
 [sub_resource type="LabelSettings" id="LabelSettings_og1vs"]
 font = ExtResource("3_2f3dj")
@@ -66,9 +66,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_og1vs")
-expand_mode = 1
-stretch_mode = 1
+texture = ExtResource("3_yq6so")
+expand_mode = 2
+stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="GameContainer" type="Control" parent="."]
