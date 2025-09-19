@@ -14,9 +14,11 @@ extends Control
 
 @export_group("Labels")
 @export var rank_label: Label
+@export var chosen_rank_label: Label
 @export var score_label: Label
 @export var high_score_label: Label
 
+var round_ranks: Array[Rank]
 var correct_answer_index: int
 var time_remaining: float = 100
 var time_speed: float = 1
@@ -64,9 +66,13 @@ func on_answer(answer_index: int):
 	
 	can_answer = false
 	if answer_index == correct_answer_index:
-		round_won() 
+		round_won()
 	else:
-		round_lost()
+		var is_timeout = answer_index < 0 and answer_index > 3
+		if is_timeout:
+			round_lost()
+		else:
+			round_lost(round_ranks[answer_index])
 		
 	next_round_timer.start()
 	
@@ -79,14 +85,19 @@ func round_won() -> void:
 	rank_label.label_settings.font_color = Color.GREEN
 	time_speed *= 1.05
 	
-func round_lost() -> void:
+	
+func round_lost(chosen_rank: Rank = null) -> void:
 	incorrect_sfx.play()
 	score = 0
 	rank_label.label_settings.font_color = Color.RED
 	time_speed = 1
 	
-	
-
+	if chosen_rank == null:
+		chosen_rank_label.text = "Aika loppui!"
+	else:
+		chosen_rank_label.text = "Valitsit: %s" % chosen_rank.rank_name
+		
+		
 func reset_round_timer() -> void:
 	time_remaining = 100
 	round_progress.value = time_remaining
@@ -94,13 +105,13 @@ func reset_round_timer() -> void:
 	
 
 func new_round() -> void:
-	var random_ranks := rank_manager.get_random_unique_ranks(option_buttons.size())
-	var correct_rank: Rank = random_ranks.pick_random()
+	round_ranks = rank_manager.get_random_unique_ranks(option_buttons.size())
+	var correct_rank: Rank = round_ranks.pick_random()
 	
 	var i := 0
 	for btn in option_buttons:
-		var rank := random_ranks[i]
-		btn.texture_normal = random_ranks[i].image
+		var rank := round_ranks[i]
+		btn.texture_normal = round_ranks[i].image
 		
 		if rank.rank_name == correct_rank.rank_name:
 			correct_answer_index = i
@@ -110,6 +121,7 @@ func new_round() -> void:
 	rank_label.text = correct_rank.rank_name
 	reset_round_timer()
 	can_answer = true
+	chosen_rank_label.text = ""
 
 
 func _on_round_time_timer_timeout() -> void:
