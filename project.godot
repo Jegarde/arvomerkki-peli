@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="ArvomerkkiPeli"
+config/description="Harjoittele Puolustusvoimien arvomerkkejä!"
+config/version="1.0"
 run/main_scene="uid://c3r4fckoal072"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+run/low_processor_mode=true
+boot_splash/image="uid://cpujqhe3vyaa4"
+config/icon="uid://beatmus5i02ha"
 
 [display]
 
