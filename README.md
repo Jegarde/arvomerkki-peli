@@ -8,6 +8,8 @@ Luotu Godot 4.4 pelimoottorilla ja Inkscapella. Ensimmäinen pelini Godotilla te
 
 Ideana on oppia arvomerkit ja valita oikea merkki nimen mukaan. Inspiraationa Intti-sovelluksen vastaava peli.
 
+Toimii myös mobiililaitteilla!
+
 
 ## Kuvakaappaus
 <img width="225" height="480" alt="In-game screenshot" src="https://github.com/user-attachments/assets/9e86a7c5-fa89-4167-a20b-5ff139fd09d9" />
