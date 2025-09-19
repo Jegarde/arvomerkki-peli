@@ -32,6 +32,7 @@
 [sub_resource type="Theme" id="Theme_og1vs"]
 GridContainer/constants/h_separation = 50
 GridContainer/constants/v_separation = 50
+HBoxContainer/constants/separation = 24
 Label/fonts/font = ExtResource("3_2f3dj")
 
 [sub_resource type="LabelSettings" id="LabelSettings_og1vs"]
@@ -177,7 +178,7 @@ alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="StatContainer"]
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 0
 text = "Pisteet: 0"
 
 [node name="HighScoreLabel" type="Label" parent="StatContainer"]
