@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c3r4fckoal072"]
+[gd_scene load_steps=32 format=3 uid="uid://c3r4fckoal072"]
 
 [ext_resource type="Script" uid="uid://cnqllqnb0nmxv" path="res://scripts/ranks.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://byi1ok57ag0lu" path="res://scripts/game.gd" id="1_y6deb"]
@@ -29,15 +29,12 @@
 [ext_resource type="AudioStream" uid="uid://dhecauxxr5031" path="res://sounds/correct.wav" id="26_vxglm"]
 [ext_resource type="AudioStream" uid="uid://xvalu3rmo3rv" path="res://sounds/incorrect.wav" id="27_2f3dj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2f3dj"]
-bg_color = Color(0.6, 1, 0.6, 1)
-
 [sub_resource type="Theme" id="Theme_og1vs"]
 GridContainer/constants/h_separation = 50
 GridContainer/constants/v_separation = 50
 HBoxContainer/constants/separation = 24
 Label/fonts/font = ExtResource("3_2f3dj")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_2f3dj")
+ProgressBar/styles/fill = null
 
 [sub_resource type="LabelSettings" id="LabelSettings_og1vs"]
 font = ExtResource("3_2f3dj")
